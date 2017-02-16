@@ -16,37 +16,17 @@
 
     <div class="row">
         <div class="col-md-8">
-            <div class="post">
-              <h3>Post Tittle</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere sunt odio voluptas dicta amet voluptate laborum assumenda, vitae ducimus dolorum similique, animi neque porro doloremque vel quibusdam aliquid distinctio. Doloremque!</p>
-              <a href="#" class="btn btn-primary">Read More</a>
-            </div>
 
-            <hr>
+            @foreach($posts as $post)
+                <div class="post">
+                    <h3>{{ $post->title }}</h3>
+                    <p>{{ substr($post->body,300) }}{{ strlen($post->body) > 300 ?  "..." : "" }}</p>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
 
-            <div class="post">
-              <h3>Post Tittle</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere sunt odio voluptas dicta amet voluptate laborum assumenda, vitae ducimus dolorum similique, animi neque porro doloremque vel quibusdam aliquid distinctio. Doloremque!</p>
-              <a href="#" class="btn btn-primary">Read More</a>
-            </div>
+                <hr>
+            @endforeach
 
-            <hr>
-
-            <div class="post">
-              <h3>Post Tittle</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere sunt odio voluptas dicta amet voluptate laborum assumenda, vitae ducimus dolorum similique, animi neque porro doloremque vel quibusdam aliquid distinctio. Doloremque!</p>
-              <a href="#" class="btn btn-primary">Read More</a>
-            </div>
-
-            <hr>
-
-            <div class="post">
-              <h3>Post Tittle</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere sunt odio voluptas dicta amet voluptate laborum assumenda, vitae ducimus dolorum similique, animi neque porro doloremque vel quibusdam aliquid distinctio. Doloremque!</p>
-              <a href="#" class="btn btn-primary">Read More</a>
-            </div>
-
-            <hr>
         </div>
         <div class="col-md-3 col-md-offset-1">
             <h2>Sidebar</h2>
