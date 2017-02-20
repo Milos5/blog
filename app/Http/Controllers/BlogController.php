@@ -7,6 +7,12 @@ use App\Post;
 
 class BlogController extends Controller
 {
+    public function getIndex(){
+        $posts = Post::latest('created_at')->paginate(2);
+
+        return view('blog.index')->withPosts($posts);
+    }
+
     public function getSingle($slug){
         // fetch from DB based on slug
         $post = Post::where('slug','=',$slug)->first();
