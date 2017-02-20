@@ -20,7 +20,7 @@
 
                 <div class="form-group">
                     <label name="message">Message:</label>
-                    <textarea id="message" name="message" class="form-control">Type your message here...</textarea>
+                    <textarea id="message" name="message" class="form-control" style="color:#c2c2c2;">Type your message here...</textarea>
                 </div>
 
                 <div>
