@@ -13,7 +13,7 @@
 //Auth Routes
 
 // Authentication routes
-Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+/*Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
 Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
@@ -27,11 +27,25 @@ Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterContro
 
 Route::get('logout', ['as'=>'logout', 'uses'=>'Auth\LoginController@logout']);
 
-//Password Rest Routes
+//Password Reset Routes
 Route::get('password/reset/{token?}', ['uses'=>'Auth\ForgotPasswordController@showLinkRequestForm']);
 Route::post('password/email', ['uses'=>'Auth\ForgotPasswordController@sendResetLinkEmail']);
-Route::post('password/reset', ['uses' => 'Auth\ResetPasswordController@reset']);
+Route::post('password/reset', ['as'=>'password.reset', 'uses' => 'Auth\ResetPasswordController@reset']);
+*/
 
+$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+$this->post('login', 'Auth\LoginController@login');
+$this->post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+$this->post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+$this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('blog/{slug}',['as'=>'blog.single', 'uses'=>'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
 

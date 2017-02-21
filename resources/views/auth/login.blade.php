@@ -6,6 +6,8 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+
+
             {!! Form::open() !!}
 
                 {{ Form::label('email', 'Email:') }}
@@ -18,6 +20,8 @@
 
             <br>
                 {{ Form::submit('Login', ['class'=>'btn btn-primary btn-block']) }}
+
+            <p class="form-spacing-top"><a href="{{ url('password/reset') }}">Forgot My Password</a></p>
             {!! Form::close() !!}
         </div>
     </div>
