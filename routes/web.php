@@ -27,6 +27,9 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
+//Tags
+
+Route::resource('tags','TagController',['except'=>['create']]);
 
 //Categories
 Route::resource('categories','CategoryController',['except'=>['create']]);
