@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSlugsToPosts extends Migration
+class AddCategoryIdToPosts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddSlugsToPosts extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function ($table){
-            $table->string('slug')->unique()->after('body');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->integer('category_id')->nullable()->after('slug')->unsigned();
         });
     }
 
@@ -25,8 +25,8 @@ class AddSlugsToPosts extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function($table){
-           $table->dropIfExists('slug');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropIfExists('category_id');
         });
     }
 }

@@ -20,6 +20,12 @@
                     <p><a href="{{ url('blog', $post->slug) }}"> {{ url('blog', $post->slug) }}</a></p>
 
                 </dl>
+
+                <dl class="dl-horizontal">
+                    <label>Category:</label>
+                    <p>{{ $post->category->name }}</p>
+
+                </dl>
                 
                 <dl class="dl-horizontal">
                     <label>Created At:</label>
