@@ -10,6 +10,14 @@
 
             <p class="lead">{{ $post->body }}</p>
 
+            <hr>
+            <div class="tags">
+                @foreach($post->tags as $tag)
+                    {{--<span class="label label-default">{{ $tag->name }}</span>--}}
+                    <a class="btn btn-default btn-xs" href="{{ route('tags.show',$tag->id) }}" role="button">{{ $tag->name }}</a>
+                @endforeach
+            </div>
+
         </div>
 
         <div class="col-md-4">

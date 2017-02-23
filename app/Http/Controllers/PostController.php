@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Session;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -34,7 +35,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::pluck('name','id');
-        return view('posts.create')->withCategories($categories);
+        $tags = Tag::all();
+        return view('posts.create')->withCategories($categories)->withTags($tags);
     }
 
     /**
@@ -45,6 +47,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
         // validate data
         $this->validate($request, [
             'title' => 'required|max:255',
@@ -61,6 +64,8 @@ class PostController extends Controller
         $post->body = $request->body;
 
         $post->save();
+
+        $post->tags()->sync($request->tags, false);
 
         Session::flash('success', 'The blog post was successfully saved!');
 
@@ -92,8 +97,9 @@ class PostController extends Controller
         //find posti in db and save it as var
         $post = Post::find($id);
         $categories = Category::pluck('name','id');
+        $tags = Tag::pluck('name','id');
         //return the view and pass in the var we prev created
-        return view('posts.edit')->withPost($post)->withCategories($categories);
+        return view('posts.edit')->withPost($post)->withCategories($categories)->withTags($tags);
     }
 
     /**
@@ -106,6 +112,8 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         // validate data
+
+        //dd($request->request);
         $post = Post::find($id);
         if($request->input('slug') == $post->slug){
             $this->validate($request, [
@@ -130,7 +138,7 @@ class PostController extends Controller
         $post->body = $request->input('body');
 
         $post->save();
-
+        $post->tags()->sync($request->tags?: [],true);
         Session::flash('success', 'The blog post was successfully updated!');
 
         // redirect
@@ -146,6 +154,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $post->tags()->detach();
 
         $post->delete();
 

@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <h1>Categories</h1>
+            <h1>Tags</h1>
             <table class="table">
                 <thead>
                 <tr>
@@ -18,7 +18,7 @@
                 @foreach($tags as $tag)
                     <tr>
                         <th>{{ $tag->id }}</th>
-                        <td>{{ $tag->name }}</td>
+                        <td><a href="{{ route('tags.show',$tag->id) }}">{{$tag->name}}</a></td>
                     </tr>
                 @endforeach
                 </tbody>
