@@ -9,6 +9,9 @@
             <h1>{{ $post->title }}</h1>
             <p>{{ $post->body }}</p>
             <p>Posted In: {{ $post->category->name }}</p>
+            @foreach($post->tags as $tag)
+                <span class="label label-default">{{ $tag->name }}</span>
+            @endforeach
         </div>
     </div>
 

@@ -43,6 +43,6 @@ Route::post('contact', 'PagesController@postContact');
 
 Route::get('about', 'PagesController@getAbout');
 
-Route::get('/', ['uses'=>'PagesController@getIndex','as'=>'index']);
+Route::get('/', ['uses'=>'PagesController@getIndex','as'=>'page.index']);
 
 Route::resource('posts', 'PostController');

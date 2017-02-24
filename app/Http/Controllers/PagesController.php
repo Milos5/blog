@@ -49,7 +49,7 @@ class PagesController extends Controller {
             $message->subject($data['subject']);
         });
         Session::flash('success','Mail sent');
-        return redirect()->route('index');
+        return redirect()->route('page.index');
     }
 
 }

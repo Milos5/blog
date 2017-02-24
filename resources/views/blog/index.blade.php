@@ -15,7 +15,10 @@
                 <h5>Published: {{ date('j. M Y. H:i', strtotime($post->created_at)) }}</h5>
 
                 <p>{{ substr($post->body, 0, 250) }}{{ strlen($post->body)>250?"...":"" }}</p>
-
+                <p>@foreach($post->tags as $tag)
+                    <span class="label label-default">{{ $tag->name }}</span>
+                @endforeach
+                </p>
                 <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-primary">Read More</a>
 
                 @if (!($loop->last))
