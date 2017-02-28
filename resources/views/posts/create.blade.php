@@ -6,7 +6,13 @@
 
     {!! Html::style('css/parsley.css') !!}
     {!! Html::style('css/select2.min.css') !!}
-
+    <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+           selector: 'textarea',
+            menubar: false
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -19,7 +25,7 @@
 
             <hr>
 
-            {!! Form::open(['route' => 'posts.store', 'data-parsley-validate' => '']) !!}
+            {!! Form::open(['route' => 'posts.store', 'data-parsley-validate' => '','files'=> true]) !!}
 
                 {{ Form::label('title', 'Tittle:') }}
                 {{ Form::text('title', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255' ]) }}
@@ -40,10 +46,14 @@
                     @endforeach
                 </select>
 
+            {{ Form::label('featured_image','Upload Featured Image:') }}
+            {{ Form::file('featured_image') }}
+
+
 
 
                 {{ Form::label('body', "Post Body:") }}
-                {{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '']) }}
+                {{ Form::textarea('body', null, ['class' => 'form-control']) }}
 
                 {{ Form::submit('Create Post', ['class' => 'btn btn-success btn-lg btn-block', 'style' => 'margin-top: 20px']) }}
 

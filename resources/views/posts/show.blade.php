@@ -8,7 +8,7 @@
 
             <h1>{{ $post->title }}</h1>
 
-            <p class="lead">{{ $post->body }}</p>
+            <p class="lead">{!!  $post->body !!}</p>
 
             <hr>
             <div class="tags">
@@ -16,6 +16,33 @@
                     {{--<span class="label label-default">{{ $tag->name }}</span>--}}
                     <a class="btn btn-default btn-xs" href="{{ route('tags.show',$tag->id) }}" role="button">{{ $tag->name }}</a>
                 @endforeach
+            </div>
+
+            <div id="backend-comments" style="margin-top: 50px">
+                <h3>Comments <small>{{ $post->comments()->count() }} total</small></h3>
+                <table class="table">
+                    <thead>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Comment</th>
+                        <th width="70px"></th>
+                    </thead>
+
+                    <tbody>
+                        @foreach($post->comments->reverse() as $comment)
+                            <tr>
+                                <td>{{ $comment->name }}</td>
+                                <td>{{ $comment->email }}</td>
+                                <td>{{ $comment->comment }}</td>
+                                <td>
+                                    <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
             </div>
 
         </div>

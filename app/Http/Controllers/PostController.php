@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Mews\Purifier\Facades\Purifier;
 use Session;
 use App\Category;
 use App\Tag;
+use Image;
 
 class PostController extends Controller
 {
@@ -61,7 +63,17 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
-        $post->body = $request->body;
+        $post->body = Purifier::clean($request->body);
+
+        if($request->hasFile('featured_image')){
+            $image=$request->file('featured_image');
+            $filename=time().'.'. $image->getClientOriginalExtension();
+            $location=public_path('images/'.$filename);
+            Image::make($image)->resize(800,400)->save($location);
+
+            $post->image = $filename;
+        }
+
 
         $post->save();
 
@@ -135,7 +147,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id');
-        $post->body = $request->input('body');
+        $post->body = Purifier::clean($request->input('body'));
 
         $post->save();
         $post->tags()->sync($request->tags?: [],true);
