@@ -50,8 +50,6 @@
             {{ Form::file('featured_image') }}
 
 
-
-
                 {{ Form::label('body', "Post Body:") }}
                 {{ Form::textarea('body', null, ['class' => 'form-control']) }}
 
